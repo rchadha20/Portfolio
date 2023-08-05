@@ -17,8 +17,4 @@ export class HomeComponent {
   Name= "Richa Chadha"
   Descripton = "Full Stack Developer"
   Content = "HTML/CSS5, JavaScript, TypeScript, NodeJS, ExpressJS, ReactJS, Angular, MongoDB"
-
-
-
-
 }

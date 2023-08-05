@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgForm } from '@angular/forms';
 import {
   FormControl,
   FormGroup,
@@ -8,30 +7,39 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { contact } from 'src/app/Models/contact';
+import { ContactService } from 'src/app/services/contact.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit{
   contactList: contact[] = [];
-  contactForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    email: new FormControl('', [Validators.email]),
-    message: new FormControl('', [
-      Validators.required,
-      Validators.minLength(10),
-    ]),
-  });
-
-  onSubmit() {
-    this.contactList.push({
-      name: this.contactForm.value.name!,
-      email: this.contactForm.value.email!,
-      message: this.contactForm.value.message!,
+  contactForm:any
+  constructor(private _http: HttpClient,private contactservice: ContactService) {}
+  ngOnInit(): void {
+    this.contactForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.email]),
+      message: new FormControl('', [
+        Validators.required,
+        Validators.minLength(10),
+      ]),
     });
+
   }
+  onSubmit() {
+    const body=this.contactForm.value;
+    this.contactservice.sendEmail(body).subscribe((res) =>console.log(res));
+  }
+
+
+
+
+
+
 }
