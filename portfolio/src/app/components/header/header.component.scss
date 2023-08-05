@@ -1,0 +1,19 @@
+.p-logo {
+  filter: drop-shadow(2px 3px 2px rgba(0, 0, 0, 0.582));
+}
+
+#pillNav2 {
+  --bs-nav-link-color: #11111;
+  --bs-nav-pills-link-active-color: #f2f2f2;
+  --bs-nav-pills-link-active-bg: #6b2fafec;
+  font-weight: 600;
+  // font-family: 'Lato', sans-serif;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: var(--bs-nav-pills-link-active-color);
+  background-color: var(--bs-nav-pills-link-active-bg);
+  transition: 0.4s ease-in-out;
+}
